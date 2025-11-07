@@ -5,115 +5,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comissão 3º Ano • EAPC 2026</title>
 <link rel="stylesheet" href="style.css">
-<style>
-/* animação suave para números do contador */
-.count-num {
-    display: inline-block;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-}
-</style>
 </head>
 <body>
 
-<header>
-<img src="img/brasao.png" alt="Brasão" class="brasao">
-<h1>Comissão 3º Ano • EAPC 2026</h1>
-<nav class="nav">
-    <a href="index.html">Início</a>
-    <a href="alunos.html">Alunos</a>
-    <a href="vendas.html">Vendas</a>
-    <a href="camisa.html">Camisa</a>
-    <a href="avisos.html">Avisos</a>
-    <a href="comissao.html" class="btn-comissao">Área Comissão</a>
-</nav>
+<header class="topbar">
+    <div class="brand">
+        <img src="img/brasao.png" alt="Brasão" class="brasao">
+        <h1>Comissão 3º Ano • EAPC 2026</h1>
+    </div>
+
+    <div id="hamburger" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="alunos.html">Alunos</a>
+        <a href="vendas.html">Vendas</a>
+        <a href="camisa.html">Camisa</a>
+        <a href="avisos.html">Avisos</a>
+        <a href="comissao.html" class="btn-comissao">Área Comissão</a>
+    </nav>
 </header>
 
 <main class="container">
-<section class="hero">
-<h2>Organização da turma e controle das atividades</h2>
-<p class="lead">Acompanhe datas, escalas, arrecadações e metas da viagem (Sirinha) — tudo em um só lugar.</p>
+    <section class="hero">
+        <h2>Organização da turma e controle das atividades</h2>
+        <p class="lead">Acompanhe datas, escalas, arrecadações e metas da viagem (Sirinha) — tudo em um só lugar.</p>
 
-<div class="cards">
-
-    <div class="card">
-        <h3>Próximo evento</h3>
-        <p id="proximo-evento">Venda da semana: 10/11 - Pátio</p>
-    </div>
-
-    <div class="card">
-        <h3>Dias até a viagem</h3>
-        <div id="countdown"></div>
-    </div>
-
-    <div class="card">
-        <h3>Contagem para a Formatura</h3>
-        <div id="countdown-formatura"></div>
-    </div>
-
-    <div class="card">
-        <h3>Meta Sirinha</h3>
-        <div class="meta">
-            <div class="meta-label">Arrecadado</div>
-            <div class="progress" data-percent="42">
-                <div class="progress-bar" style="width:42%"></div>
+        <div class="cards">
+            <div class="card">
+                <h3>Próximo evento</h3>
+                <p id="proximo-evento">Venda da semana: 10/11 - Pátio</p>
             </div>
-            <div class="meta-values">R$ 4.200 / R$ 10.000</div>
+
+            <div class="card">
+                <h3>Dias até a viagem</h3>
+                <div id="countdown"></div>
+            </div>
+
+            <div class="card">
+                <h3>Contagem para a Formatura</h3>
+                <div id="countdown-formatura"></div>
+            </div>
+
+            <div class="card">
+                <h3>Meta Sirinha</h3>
+                <div class="meta">
+                    <div class="meta-label">Arrecadado</div>
+                    <div class="progress" data-percent="42">
+                        <div class="progress-bar" style="width:42%"></div>
+                    </div>
+                    <div class="meta-values">R$ 4.200 / R$ 10.000</div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-</div>
-</section>
-
-<section class="logos-row">
-<img src="img/logo-eapc.png" alt="EAPC" class="logo-eapc">
-<img src="img/logo-upe.png" alt="UPE" class="logo-upe">
-</section>
+    <section class="logos-row">
+        <img src="img/logo-eapc.png" alt="EAPC" class="logo-eapc">
+        <img src="img/logo-upe.png" alt="UPE" class="logo-upe">
+    </section>
 </main>
 
 <footer class="footer">
-<small>Desenvolvido para a Comissão 3º Ano • EAPC 2026</small>
+    <small>Desenvolvido para a Comissão 3º Ano • EAPC 2026</small>
 </footer>
-
-<script>
-// === Contadores animados de dias/horas/minutos/segundos ===
-function startCountdown(targetId, targetDate) {
-    const el = document.getElementById(targetId);
-    if (!el) return;
-
-    function updateCountdown() {
-        const now = new Date();
-        const t = new Date(targetDate) - now;
-        if (t <= 0) {
-            el.innerHTML = 'Evento já ocorreu!';
-            clearInterval(interval);
-            return;
-        }
-        const dias = Math.floor(t / (1000 * 60 * 60 * 24));
-        const horas = Math.floor((t / (1000 * 60 * 60)) % 24);
-        const minutos = Math.floor((t / (1000 * 60)) % 60);
-        const segundos = Math.floor((t / 1000) % 60);
-
-        // animação suave de atualização de números
-        el.innerHTML = `
-            <span class="count-num">${dias}</span>d 
-            <span class="count-num">${horas}</span>h 
-            <span class="count-num">${minutos}</span>m 
-            <span class="count-num">${segundos}</span>s
-        `;
-    }
-
-    updateCountdown(); // atualizar imediatamente
-    const interval = setInterval(updateCountdown, 1000);
-}
-
-// Contador Sirinhas (370 dias a partir de hoje)
-const hoje = new Date();
-const sirinhasDate = new Date(hoje.getTime() + 370 * 24 * 60 * 60 * 1000); // +370 dias
-startCountdown('countdown', sirinhasDate);
-
-// Contador Formatura (19 de dezembro de 2026)
-startCountdown('countdown-formatura', '2026-12-19T00:00:00');
-</script>
 
 <script src="js/script.js"></script>
 </body>

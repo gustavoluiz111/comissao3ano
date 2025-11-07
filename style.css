@@ -1,0 +1,44 @@
+:root{
+--indigo: #2b2160; /* indigo escuro */
+--red: #e31c25; /* vermelho */
+--white: #ffffff;
+--max-width: 1000px;
+--radius: 12px;
+}
+
+
+*{box-sizing:border-box;font-family:Inter, system-ui, Arial, sans-serif}
+body{margin:0;background:var(--white);color:var(--indigo)}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:linear-gradient(90deg,var(--white),#f7f7fb);border-bottom:2px solid rgba(43,33,96,0.06)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand h1{font-size:18px;margin:0;color:var(--indigo)}
+.brasao{height:64px}
+.nav a{margin-left:14px;text-decoration:none;color:var(--indigo);font-weight:600}
+.nav .btn-comissao{padding:8px 12px;border-radius:8px;background:var(--indigo);color:var(--white)}
+.container{max-width:var(--max-width);margin:28px auto;padding:0 16px}
+.hero{display:block}
+.hero h2{font-size:26px;margin:0 0 8px}
+.lead{margin:0 0 20px;color:#444}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
+.logos-row{display:flex;justify-content:space-between;align-items:center;margin-top:30px}
+.logo-eapc{height:80px}
+.logo-upe{height:60px}
+.footer{padding:20px;text-align:center;color:#666;border-top:1px solid rgba(0,0,0,0.03)}
+.lista-alunos{columns:2;list-style:none;padding:0}
+.lista-alunos li{padding:6px 0}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:10px;border-bottom:1px solid #eee}
+.mockup{max-width:300px}
+.login-box{max-width:420px;padding:20px;background:#fff;border-radius:12px;box-shadow:0 6px 18px rgba(43,33,96,0.08)}
+.login-box input{width:100%;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
+.login-box button{padding:10px 14px;background:var(--indigo);color:var(--white);border:none;border-radius:8px}
+.financas{display:flex;gap:24px}
+.financas div{background:#fff;padding:12px;border-radius:10px;flex:1;box-shadow:0 4px 14px rgba(0,0,0,0.04)}
+.form-inline{display:flex;gap:8px;margin-top:12px}
+.form-inline input{padding:8px;border-radius:8px;border:1px solid #ddd}
+.form-inline button{padding:8px 10px;border-radius:8px;border:none;background:var(--red);color:#fff}
+.progress{height:14px;background:#f0f0f5;border-radius:999px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--indigo),var(--red))}
+.small{font-size:12px;color:#777}
+@media(max-width:720px){.nav{display:none}.logos-row{flex-direction:column;gap:8px}.lista-alunos{columns:1}}

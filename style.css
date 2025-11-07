@@ -21,14 +21,8 @@ body {
 
 /* ===== Efeitos de animação ===== */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulseBorder {
@@ -50,6 +44,8 @@ body {
   background: linear-gradient(90deg, var(--indigo), #20184a);
   border-bottom: 3px solid var(--red);
   animation: fadeInUp 0.8s ease-out;
+  position: relative;
+  z-index: 1000;
 }
 
 .brand {
@@ -131,7 +127,7 @@ body {
   background: #342a73;
   border-radius: var(--radius);
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   border-left: 4px solid var(--red);
   transition: 0.4s;
   position: relative;
@@ -140,7 +136,7 @@ body {
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 6px 20px rgba(227, 28, 37, 0.4);
+  box-shadow: 0 6px 20px rgba(227,28,37,0.4);
 }
 
 .card::after {
@@ -161,52 +157,39 @@ body {
   animation: fadeInUp 1.5s ease;
 }
 
-.logo-eapc {
-  height: 80px;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
-}
-
-.logo-upe {
-  height: 60px;
-  filter: drop-shadow(0 0 6px rgba(227, 28, 37, 0.4));
-}
+.logo-eapc { height: 80px; filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); }
+.logo-upe { height: 60px; filter: drop-shadow(0 0 6px rgba(227,28,37,0.4)); }
 
 /* ===== Rodapé ===== */
 .footer {
   padding: 20px;
   text-align: center;
-  color: rgba(255, 255, 255, 0.8);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255,255,255,0.8);
+  border-top: 1px solid rgba(255,255,255,0.2);
   margin-top: 40px;
   font-size: 14px;
 }
 
 /* ===== Finanças ===== */
-.financas {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
+.financas { display: flex; gap: 24px; flex-wrap: wrap; }
 .financas div {
   background: #3a3178;
   padding: 16px;
   border-radius: 10px;
   flex: 1;
   min-width: 250px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
   transition: 0.3s;
 }
-
 .financas div:hover {
   transform: scale(1.02);
-  box-shadow: 0 6px 20px rgba(227, 28, 37, 0.3);
+  box-shadow: 0 6px 20px rgba(227,28,37,0.3);
 }
 
 /* ===== Barra de Progresso ===== */
 .progress {
   height: 14px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255,255,255,0.2);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -228,7 +211,7 @@ body {
   padding: 20px;
   background: #342a73;
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
   margin: auto;
   animation: fadeInUp 1.3s ease;
 }
@@ -239,7 +222,7 @@ body {
   margin: 8px 0;
   border: 1px solid #555;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.1);
   color: var(--white);
 }
 
@@ -259,10 +242,36 @@ body {
   transform: scale(1.03);
 }
 
+/* ===== Hamburger mobile ===== */
+.hamburger { display: none; flex-direction: column; gap: 4px; width: 28px; height: 22px; cursor: pointer; z-index: 1100; }
+.hamburger span { display: block; height: 4px; width: 100%; background: var(--white); border-radius: 2px; transition: 0.3s; }
+
 /* ===== Responsividade ===== */
+@media (max-width: 1024px) {
+  .cards { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+}
+
 @media (max-width: 720px) {
-  .nav { display: none; }
-  .logos-row { flex-direction: column; gap: 8px; }
-  .lista-alunos { columns: 1; }
+  .nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 64px;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background: #20184a;
+    padding: 20px;
+    gap: 16px;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.5);
+    transition: right 0.3s ease;
+    z-index: 1000;
+  }
+  .nav.active { right: 0; }
+  .nav a { margin-left: 0; font-size: 18px; }
+  .hamburger { display: flex; }
+
   .hero h2 { font-size: 24px; }
+  .logos-row { flex-direction: column; gap: 12px; }
+  .lista-alunos { columns: 1; }
 }

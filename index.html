@@ -4,7 +4,209 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comissão 3º Ano • EAPC 2026</title>
-<link rel="stylesheet" href="style.css">
+<style>
+:root {
+  --indigo: #2b2160;
+  --red: #e31c25;
+  --white: #ffffff;
+  --max-width: 1000px;
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--indigo);
+  color: var(--white);
+}
+
+/* ======= HEADER ======= */
+.topbar {
+  background-color: var(--indigo);
+  color: var(--white);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.topbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar .brand h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.brasao {
+  width: 40px;
+  height: 40px;
+}
+
+.nav {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: var(--red);
+}
+
+.btn-comissao {
+  background-color: var(--red);
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* ======= HAMBURGUER ======= */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--white);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Animação do X */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ======= MOBILE NAV ======= */
+@media (max-width: 768px) {
+  .nav {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background-color: var(--indigo);
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    display: none;
+    padding: 1rem;
+  }
+
+  .nav.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* ======= MAIN ======= */
+.container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 2rem;
+}
+
+.hero {
+  text-align: center;
+}
+
+.lead {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.progress {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  height: 10px;
+  margin-top: 0.5rem;
+}
+
+.progress-bar {
+  background-color: var(--red);
+  height: 10px;
+  width: 0%;
+  transition: width 0.6s ease;
+}
+
+.meta-values {
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+/* ======= FOOTER ======= */
+.footer {
+  background-color: var(--indigo);
+  text-align: center;
+  padding: 1rem;
+  color: var(--white);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* ======= LOGOS ======= */
+.logos-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.logo-eapc, .logo-upe {
+  width: 100px;
+  height: auto;
+}
+</style>
 </head>
 <body>
 
@@ -20,8 +222,8 @@
         <span></span>
     </div>
 
-    <nav class="nav">
-        <a href="index.html">Início</a>
+    <nav class="nav" id="nav-menu">
+        <a href="index.html" class="active">Início</a>
         <a href="alunos.html">Alunos</a>
         <a href="vendas.html">Vendas</a>
         <a href="camisa.html">Camisa</a>
@@ -38,27 +240,36 @@
         <div class="cards">
             <div class="card">
                 <h3>Próximo evento</h3>
-                <p id="proximo-evento">Venda da semana: 10/11 - Pátio</p>
+                <p id="proximo-evento">Início das vendas - Quiosque</p>
+            </div>
+
+            <div class="card">
+                <h3>Encerramento da Viagem</h3>
+                <p>Embarque previsto: <strong>indefinido</strong></p>
+                <p>Retorno: <strong>indefinido</strong></p>
             </div>
 
             <div class="card">
                 <h3>Dias até a viagem</h3>
                 <div id="countdown"></div>
+                <div class="progress"><div id="progress-viagem" class="progress-bar"></div></div>
             </div>
 
             <div class="card">
                 <h3>Contagem para a Formatura</h3>
                 <div id="countdown-formatura"></div>
+                <div class="progress"><div id="progress-formatura" class="progress-bar"></div></div>
+                <p class="data-formatura">Data: 19/12/2026 às 17h</p>
             </div>
 
             <div class="card">
                 <h3>Meta Sirinha</h3>
                 <div class="meta">
                     <div class="meta-label">Arrecadado</div>
-                    <div class="progress" data-percent="42">
-                        <div class="progress-bar" style="width:42%"></div>
+                    <div class="progress" data-percent="0">
+                        <div class="progress-bar" style="width:0%"></div>
                     </div>
-                    <div class="meta-values">R$ 4.200 / R$ 10.000</div>
+                    <div class="meta-values">R$ 0.000 / R$ 30.00</div>
                 </div>
             </div>
         </div>
@@ -74,6 +285,55 @@
     <small>Desenvolvido para a Comissão 3º Ano • EAPC 2026</small>
 </footer>
 
-<script src="js/script.js"></script>
+<script>
+// ===== HAMBURGUER MENU =====
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+
+hamburger.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+  hamburger.classList.toggle('open');
+});
+
+// ===== CONTAGEM REGRESSIVA COM BARRAS =====
+function countdown(targetDate, elementId, progressId) {
+  if (!targetDate || targetDate.toLowerCase() === "indefinido") return;
+
+  const target = new Date(targetDate).getTime();
+  const start = new Date().getTime();
+
+  function update() {
+    const now = new Date().getTime();
+    const distance = target - now;
+    const total = target - start;
+    const progressPercent = Math.min(100, ((total - distance) / total) * 100);
+
+    if (distance <= 0) {
+      document.getElementById(elementId).innerHTML = "Concluído 🎉";
+      document.getElementById(progressId).style.width = "100%";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance / (1000*60*60)) % 24);
+    const minutes = Math.floor((distance / (1000*60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    document.getElementById(elementId).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s restantes`;
+    document.getElementById(progressId).style.width = progressPercent + "%";
+  }
+
+  update();
+  setInterval(update, 1000);
+}
+
+// ===== DATAS IMPORTANTES =====
+countdown("December 19, 2026 17:00:00", "countdown-formatura", "progress-formatura");
+
+// Exemplo de data da viagem (substitua "indefinido" quando souber a data)
+const dataViagem = "December 20, 2026 08:00:00"; 
+countdown(dataViagem, "countdown", "progress-viagem");
+</script>
+
 </body>
 </html>

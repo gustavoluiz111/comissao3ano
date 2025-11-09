@@ -8,67 +8,245 @@
 </head>
 <body>
 <header class="topbar">
-<div class="brand"><h1>Área Restrita — Comissão</h1></div>
-<nav class="nav">
-<a href="index.html">Início</a>
-<a href="alunos.html">Alunos</a>
-<a href="vendas.html">Vendas</a>
-<a href="camisa.html">Camisa</a>
-<a href="avisos.html">Avisos</a>
-<a href="comissao.html" class="btn-comissao">Área Comissão</a>
-</nav>
+  <div class="brand"><h1>Área Restrita — Comissão</h1></div>
+
+  <!-- Hamburger para mobile -->
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Nav Menu -->
+  <nav class="nav" id="nav-menu">
+    <a href="index.html">Início</a>
+    <a href="alunos.html">Alunos</a>
+    <a href="vendas.html">Vendas</a>
+    <a href="camisa.html">Camisa</a>
+    <a href="avisos.html">Avisos</a>
+    <a href="comissao.html" class="btn-comissao">Área Comissão</a>
+  </nav>
 </header>
 
-
 <main class="container">
-<div id="login-box" class="login-box">
-<h2>Login Comissão</h2>
-<input id="input-senha" type="password" placeholder="Senha da comissão">
-<button id="btn-login">Entrar</button>
-<p class="small">Senha local — mude no arquivo js/script.js</p>
-</div>
+  <!-- Login da comissão -->
+  <div id="login-box" class="login-box">
+    <h2>Login Comissão</h2>
+    <input id="input-senha" type="password" placeholder="Senha da comissão">
+    <button id="btn-login">Entrar</button>
+    <p class="small"></p>
+    <p id="login-msg" style="color:red;"></p>
+  </div>
 
+  <!-- Painel restrito -->
+  <div id="painel-comissao" style="display:none">
+    <h2>Painel Financeiro</h2>
+    <div class="financas">
+      <div>
+        <h3>Arrecadado</h3>
+        <div id="valor-arrecadado">R$ 0,00</div>
+      </div>
+      <div>
+        <h3>Gastos</h3>
+        <div id="valor-gastos">R$ 0,00</div>
+      </div>
+      <div>
+        <h3>Saldo</h3>
+        <div id="valor-saldo">R$ 0,00</div>
+      </div>
+    </div>
 
-<div id="painel-comissao" style="display:none">
-<h2>Painel Financeiro</h2>
+    <h3>Controle (Editar valores)</h3>
+    <div class="form-inline">
+      <input id="input-arrecada" placeholder="Adicionar arrecadação (ex: 200)" />
+      <button id="btn-add-arrecada">Adicionar</button>
+      <input id="input-gasto" placeholder="Adicionar gasto (ex: 50)" />
+      <button id="btn-add-gasto">Adicionar</button>
+    </div>
 
+    <h3>Avisos</h3>
+    <textarea id="input-aviso" placeholder="Adicionar aviso ou evento"></textarea>
+    <button id="btn-add-aviso">Adicionar Aviso</button>
+    <ul id="lista-avisos-comissao"></ul>
 
-<div class="financas">
-<div>
-<h3>Arrecadado</h3>
-<div id="valor-arrecadado">R$ 4.200,00</div>
-</div>
-<div>
-<h3>Gastos</h3>
-<div id="valor-gastos">R$ 1.300,00</div>
-</div>
-<div>
-<h3>Saldo</h3>
-<div id="valor-saldo">R$ 2.900,00</div>
-</div>
-</div>
+    <h3>Upload de Arquivo</h3>
+    <input type="file" id="input-arquivo" />
+    <button id="btn-upload">Enviar Arquivo</button>
+    <ul id="arquivos-enviados"></ul>
 
-
-<h3>Controle (Editar valores)</h3>
-<div class="form-inline">
-<input id="input-arrecada" placeholder="Adicionar arrecadação (ex: 200)" />
-<button id="btn-add-arrecada">Adicionar</button>
-
-
-<input id="input-gasto" placeholder="Adicionar gasto (ex: 50)" />
-<button id="btn-add-gasto">Adicionar</button>
-</div>
-
-
-<h3>Exportar</h3>
-<button id="btn-export-csv">Exportar balanço CSV</button>
-</div>
-
-
+    <h3>Exportar</h3>
+    <button id="btn-export-csv">Exportar balanço CSV</button>
+  </div>
 </main>
 
-
 <footer class="footer"><small>Comissão 3º Ano • EAPC 2026</small></footer>
-<script src="js/script.js"></script>
-</body>
-</html>
+
+<script>
+// ===== MENU HAMBURGUER =====
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+hamburger && hamburger.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+  hamburger.classList.toggle('open');
+});
+
+// ===== LOGIN COMISSÃO =====
+const loginBox = document.getElementById('login-box');
+const painel = document.getElementById('painel-comissao');
+const senhaInput = document.getElementById('input-senha');
+const btnLogin = document.getElementById('btn-login');
+const msgLogin = document.getElementById('login-msg');
+// Defina a senha
+const senhaComissao = "napolitanopaidetodos";
+
+btnLogin.addEventListener('click', () => {
+  if(senhaInput.value === senhaComissao){
+    loginBox.style.display = 'none';
+    painel.style.display = 'block';
+    carregarDados();
+  } else {
+    msgLogin.innerText = "Senha incorreta!";
+  }
+});
+
+// ===== ELEMENTOS FINANCEIRO =====
+const valG = document.getElementById('valor-gastos');
+const valS = document.getElementById('valor-saldo');
+const valA = document.getElementById('valor-arrecadado');
+const addA = document.getElementById('btn-add-arrecada');
+const addG = document.getElementById('btn-add-gasto');
+
+// ===== AVISOS =====
+const btnAviso = document.getElementById('btn-add-aviso');
+const listaAvisos = document.getElementById('lista-avisos-comissao');
+
+// ===== UPLOAD DE ARQUIVO =====
+const btnUpload = document.getElementById('btn-upload');
+const inputArquivo = document.getElementById('input-arquivo');
+const listaArquivos = document.getElementById('arquivos-enviados');
+
+// ===== LOCALSTORAGE =====
+function salvarDados(){
+  const dados = {
+    arrecadado: valA.innerText,
+    gastos: valG.innerText,
+    saldo: valS.innerText,
+    avisos: Array.from(listaAvisos.children).map(li=>li.innerText),
+    arquivos: Array.from(listaArquivos.children).map(li=>li.innerText)
+  };
+  localStorage.setItem('comissaoDados', JSON.stringify(dados));
+}
+
+function carregarDados(){
+  const dados = JSON.parse(localStorage.getItem('comissaoDados'));
+  if(!dados) return;
+  valA.innerText = dados.arrecadado;
+  valG.innerText = dados.gastos;
+  valS.innerText = dados.saldo;
+  listaAvisos.innerHTML='';
+  dados.avisos.forEach(a=>{
+    const li = document.createElement('li');
+    li.innerText = a;
+    listaAvisos.appendChild(li);
+  });
+  listaArquivos.innerHTML='';
+  dados.arquivos.forEach(a=>{
+    const li = document.createElement('li');
+    li.innerText = a;
+    listaArquivos.appendChild(li);
+  });
+}
+
+// ===== FUNÇÕES AUXILIARES =====
+function parseMoney(str){ return Number(String(str).replace(/[^0-9,.-]/g,'').replace(',','.'))||0; }
+function formatMoney(n){ return 'R$ '+n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function animateValue(el,start,end,duration=500){
+  const startTime = performance.now();
+  function update(now){
+    const elapsed = now-startTime;
+    const progress = Math.min(elapsed/duration,1);
+    const value = start + (end-start)*progress;
+    el.innerText = formatMoney(value);
+    if(progress<1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+function atualizarSaldo(){
+  const a=parseMoney(valA.innerText);
+  const g=parseMoney(valG.innerText);
+  animateValue(valS,parseMoney(valS.innerText),a-g);
+  salvarDados();
+}
+
+// ===== EVENTOS ADICIONAR =====
+addA && addA.addEventListener('click', ()=>{
+  const v=parseFloat(document.getElementById('input-arrecada').value)||0;
+  if(v<=0) return alert('Informe um valor válido');
+  const curA=parseMoney(valA.innerText);
+  animateValue(valA,curA,curA+v);
+  atualizarSaldo();
+  document.getElementById('input-arrecada').value='';
+});
+
+addG && addG.addEventListener('click', ()=>{
+  const v=parseFloat(document.getElementById('input-gasto').value)||0;
+  if(v<=0) return alert('Informe um valor válido');
+  const curG=parseMoney(valG.innerText);
+  animateValue(valG,curG,curG+v);
+  atualizarSaldo();
+  document.getElementById('input-gasto').value='';
+});
+
+btnAviso && btnAviso.addEventListener('click', ()=>{
+  const texto = document.getElementById('input-aviso').value.trim();
+  if(!texto) return alert('Digite um aviso!');
+  const li = document.createElement('li');
+  li.innerText = texto;
+  listaAvisos.appendChild(li);
+  document.getElementById('input-aviso').value='';
+  salvarDados();
+});
+
+btnUpload && btnUpload.addEventListener('click', ()=>{
+  if(inputArquivo.files.length===0) return alert('Selecione um arquivo!');
+  const file = inputArquivo.files[0];
+  const li = document.createElement('li');
+  li.innerText = file.name;
+  listaArquivos.appendChild(li);
+  inputArquivo.value='';
+  salvarDados();
+  alert('Upload simulado — backend real necessário para salvar arquivo');
+});
+
+// ===== EXPORT CSV =====
+const btnExport = document.getElementById('btn-export-csv');
+btnExport && btnExport.addEventListener('click', ()=>{
+  const a = valA.innerText.replace('R$ ','');
+  const g = valG.innerText.replace('R$ ','');
+  const s = valS.innerText.replace('R$ ','');
+  const csv = 'Tipo,Valor\nArrecadado,'+a+'\nGastos,'+g+'\nSaldo,'+s+'\n';
+  const blob = new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  const aLink = document.createElement('a');
+  aLink.href = URL.createObjectURL(blob);
+  aLink.download = 'balanco_comissao.csv';
+  aLink.click();
+});
+
+// ===== FUNÇÃO LIMPAR TUDO =====
+function limparTudo(){
+  if(!confirm('Deseja realmente limpar todos os dados da comissão?')) return;
+  valA.innerText = 'R$ 0,00';
+  valG.innerText = 'R$ 0,00';
+  valS.innerText = 'R$ 0,00';
+  listaAvisos.innerHTML='';
+  listaArquivos.innerHTML='';
+  localStorage.removeItem('comissaoDados');
+}
+
+// Botão para limpar tudo
+const btnLimpar = document.createElement('button');
+btnLimpar.innerText = 'Limpar Tudo';
+btnLimpar.style.marginTop='10px';
+btnLimpar.addEventListener('click', limparTudo);
+painel.appendChild(btnLimpar);
+</script>

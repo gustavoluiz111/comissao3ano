@@ -1,6 +1,6 @@
 :root {
-  --indigo: #2b2160; /* indigo escuro */
-  --red: #e31c25; /* vermelho */
+  --indigo: #2b2160;
+  --red: #e31c25;
   --white: #ffffff;
   --max-width: 1000px;
   --radius: 12px;
@@ -62,11 +62,6 @@ body {
   animation: glowText 3s infinite ease-in-out;
 }
 
-.brasao {
-  height: 64px;
-  animation: fadeInUp 1s ease-out;
-}
-
 .nav a {
   margin-left: 14px;
   text-decoration: none;
@@ -99,20 +94,6 @@ body {
 .hero {
   text-align: center;
   animation: fadeInUp 1s ease;
-}
-
-.hero h2 {
-  font-size: 32px;
-  margin: 0 0 8px;
-  color: var(--white);
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.lead {
-  margin: 0 0 20px;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 16px;
 }
 
 /* ===== Cards ===== */
@@ -148,109 +129,26 @@ body {
   opacity: 0.2;
 }
 
-/* ===== Logos ===== */
-.logos-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 40px;
-  animation: fadeInUp 1.5s ease;
-}
-
-.logo-eapc { height: 80px; filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); }
-.logo-upe { height: 60px; filter: drop-shadow(0 0 6px rgba(227,28,37,0.4)); }
-
-/* ===== Rodapé ===== */
-.footer {
-  padding: 20px;
-  text-align: center;
-  color: rgba(255,255,255,0.8);
-  border-top: 1px solid rgba(255,255,255,0.2);
-  margin-top: 40px;
-  font-size: 14px;
-}
-
-/* ===== Finanças ===== */
-.financas { display: flex; gap: 24px; flex-wrap: wrap; }
-.financas div {
-  background: #3a3178;
-  padding: 16px;
-  border-radius: 10px;
-  flex: 1;
-  min-width: 250px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-  transition: 0.3s;
-}
-.financas div:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 20px rgba(227,28,37,0.3);
-}
-
-/* ===== Barra de Progresso ===== */
-.progress {
-  height: 14px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--red), var(--white));
-  animation: progressMove 2.5s ease-in-out infinite alternate;
-}
-
-@keyframes progressMove {
-  from { transform: translateX(-5%); }
-  to { transform: translateX(5%); }
-}
-
-/* ===== Login ===== */
-.login-box {
-  max-width: 420px;
-  padding: 20px;
-  background: #342a73;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-  margin: auto;
-  animation: fadeInUp 1.3s ease;
-}
-
-.login-box input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #555;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.1);
-  color: var(--white);
-}
-
-.login-box button {
-  padding: 10px 14px;
-  background: var(--red);
-  color: var(--white);
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.login-box button:hover {
-  background: #ff2c3a;
-  transform: scale(1.03);
-}
-
 /* ===== Hamburger mobile ===== */
-.hamburger { display: none; flex-direction: column; gap: 4px; width: 28px; height: 22px; cursor: pointer; z-index: 1100; }
-.hamburger span { display: block; height: 4px; width: 100%; background: var(--white); border-radius: 2px; transition: 0.3s; }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  width: 28px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 1100;
+}
+.hamburger span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: var(--white);
+  border-radius: 2px;
+  transition: 0.3s;
+}
 
 /* ===== Responsividade ===== */
-@media (max-width: 1024px) {
-  .cards { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-}
-
 @media (max-width: 720px) {
   .nav {
     display: flex;
@@ -270,8 +168,4 @@ body {
   .nav.active { right: 0; }
   .nav a { margin-left: 0; font-size: 18px; }
   .hamburger { display: flex; }
-
-  .hero h2 { font-size: 24px; }
-  .logos-row { flex-direction: column; gap: 12px; }
-  .lista-alunos { columns: 1; }
 }

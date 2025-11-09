@@ -1,7 +1,10 @@
-// ===== Menu mobile =====
-const hamburger = document.getElementById('hamburger');
-const nav = document.querySelector('.nav');
-hamburger && hamburger.addEventListener('click', ()=>{ nav.classList.toggle('active'); });
+// ===== Hamburger toggle =====
+document.querySelectorAll('.hamburger').forEach(hamburger=>{
+  hamburger.addEventListener('click',()=>{
+    const nav = document.querySelector('.nav');
+    if(nav) nav.classList.toggle('active');
+  });
+});
 
 // ===== Contadores animados =====
 function startCountdown(targetId, targetDate){
@@ -30,11 +33,6 @@ function startCountdown(targetId, targetDate){
     const interval = setInterval(updateCountdown,1000);
 }
 
-// Inicializa contadores
-const hoje = new Date();
-startCountdown('countdown', new Date(hoje.getTime() + 370*24*60*60*1000));
-startCountdown('countdown-formatura','2026-12-19T00:00:00');
-
 // ===== Financeiro =====
 const valG = document.getElementById('valor-gastos');
 const valS = document.getElementById('valor-saldo');
@@ -62,7 +60,7 @@ loginBtn && loginBtn.addEventListener('click', ()=>{
     if(loginInput.value==='12345'){
         document.getElementById('comissao').style.display='block';
         document.getElementById('login-area').style.display='none';
-    }else alert('Senha incorreta!');
+    } else alert('Senha incorreta!');
 });
 
 addA && addA.addEventListener('click', ()=>{

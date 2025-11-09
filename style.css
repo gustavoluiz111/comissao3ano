@@ -19,7 +19,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== Efeitos de animação ===== */
+/* ===== Animações ===== */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -35,7 +35,7 @@ body {
   50% { text-shadow: 0 0 20px rgba(255,255,255,0.7); }
 }
 
-/* ===== Topo ===== */
+/* ===== Topbar / Header ===== */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -62,8 +62,14 @@ body {
   animation: glowText 3s infinite ease-in-out;
 }
 
+/* ===== Navegação ===== */
+.nav {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
 .nav a {
-  margin-left: 14px;
   text-decoration: none;
   color: var(--white);
   font-weight: 600;
@@ -89,11 +95,6 @@ body {
   margin: 40px auto;
   padding: 0 16px;
   animation: fadeInUp 1.2s ease;
-}
-
-.hero {
-  text-align: center;
-  animation: fadeInUp 1s ease;
 }
 
 /* ===== Cards ===== */
@@ -129,43 +130,44 @@ body {
   opacity: 0.2;
 }
 
-/* ===== Hamburger mobile ===== */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  width: 28px;
-  height: 22px;
-  cursor: pointer;
-  z-index: 1100;
+/* ===== Logos ===== */
+.logos-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  animation: fadeInUp 1.5s ease;
 }
-.hamburger span {
-  display: block;
-  height: 4px;
-  width: 100%;
-  background: var(--white);
-  border-radius: 2px;
-  transition: 0.3s;
+
+.logo-eapc { height: 80px; filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); }
+.logo-upe { height: 60px; filter: drop-shadow(0 0 6px rgba(227,28,37,0.4)); }
+
+/* ===== Rodapé ===== */
+.footer {
+  padding: 20px;
+  text-align: center;
+  color: rgba(255,255,255,0.8);
+  border-top: 1px solid rgba(255,255,255,0.2);
+  margin-top: 40px;
+  font-size: 14px;
 }
 
 /* ===== Responsividade ===== */
 @media (max-width: 720px) {
-  .nav {
-    display: flex;
+  .topbar {
     flex-direction: column;
-    position: fixed;
-    top: 64px;
-    right: -250px;
-    width: 250px;
-    height: 100%;
-    background: #20184a;
-    padding: 20px;
-    gap: 16px;
-    box-shadow: -4px 0 12px rgba(0,0,0,0.5);
-    transition: right 0.3s ease;
-    z-index: 1000;
+    align-items: flex-start;
+    gap: 10px;
   }
-  .nav.active { right: 0; }
-  .nav a { margin-left: 0; font-size: 18px; }
-  .hamburger { display: flex; }
+  .nav {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  .nav a {
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+    padding: 6px 0;
+  }
 }
